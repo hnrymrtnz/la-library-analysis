@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <title> Los Angeles County Public Libraries </title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav">
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="container-title">
+            <span class="label"> Education </span>
+            <h1> Are LA Public Libraries Distributed Equitably Across Neighborhoods Relative to Educational Need?  </h1>
+            <p> By <u> Henry Martinez </u> </p>
+        </div>
+        <div class="container-iframe">
+            <iframe src="{{ url_for('static', filename='map.html') }}"></iframe>
+            <p> An interactive map displaying library locations and data choropleths. </p>
+        </div>
+        <div class="container-section">
+            <h2> Executive Summary </h2>
+            <p> This data analysis examines the equitable distribution of public libraries across 256 neighborhoods in Los Angeles County, focusing primarily on whether library placement aligns with educational disparity. Leveraging geospatial analysis and statistical methods, I calculated the accessibility to libraries and educational need of each neighborhood, based on indicators such as English learner populations, college enrollment rates, and educational attainment levels.
+            </p><br>
+            <p>The findings indicate that there is a substantial gap in equity for library placement. Nearly 95% of neighborhoods do not have adequate library access (meaning they lack at least one library per 10,000 residents), with no discernable correlation between placement and educational need. High-need neighborhoods are clustered within the central Los Angeles area, however, library distribution shows that this isn’t taken into account for placement, therefore lacking equity-based planning. These findings indicate that there is a severe gap in current LA library infrastructure policy, and presents the opportunity to include educational need indicators in future library construction planning.
+            </p><br>
+            <p>For the purposes of this analysis, the following 16 neighborhoods were excluded on the basis of having no recorded population: Chatsworth Reservoir, Elizabeth Lake, Green Valley, Griffith Park, Hansen Dam, Hasley Canyon, Lake Hughes, Lake Los Angeles, Littlerock, Ramona, Sepulveda Basin, Stevenson Ranch, Unincorporated Catalina Island, Universal City, Val Verde, West San Dimas.
+            </p><br>
+            <h3> Key Findings </h3>
+            <ul>
+                <li> Of the 256 observed neighborhoods... </li>
+                <ul>
+                    <li>93 (~36%) do not have a public library within their boundaries.</li>
+                    <li>149 (~58%) have at least one public library within their boundaries, but do not have adequate library access (at least one library per 10,000 residents).</li>
+                    <li>14 (~5%) have at least one public library within their boundaries, and have adequate library access (at least one library per 10,000 residents).</li>
+                </ul>
+                <li> The highest need neighborhoods are predominantly clustered within the central Los Angeles, San Fernando Valley, and Lancaster/Palmdale areas. </li>
+                <li> There is no significant correlation between the need scores of each neighborhood and calculated public library access (r = -0.04, p > 0.05). </b></li>
+                <lI> The average distribution of library accessibility for each need group indicates that placement is random, and not guided by education-based equity planning. </lI>
+            </ul>
+        </div>
+        <div class="container-section">
+            <h2> Analysis </h2>
+            <h3> Methodology </h3>
+            <p>The data analysis considers five datasets: library counts, population counts, English learner percentages, college enrollment rates, and percentages of residents without high school diplomas, each per neighborhood in LA county. Prior to conducting the analysis, each dataset was cleaned to remove neighborhoods with populations of zero, to ensure subsequent calculations would only take into consideration neighborhoods with measurable library accessibility and educational need.
+            </p><br>
+            <h3> Measuring Library Access</h3>
+            <p>The first step in the analysis was to normalize library counts per neighborhood, to ensure fair comparisons for library accessibility. This was done by taking the percentage of raw library counts relative to the population of the neighborhood and multiplying it by 10,000, giving us the amount of libraries present in a given neighborhood per 10,000 residents:
+            </p>
+            <ul>
+                <li> Libraries per 10k = (Library Count / Population) x 10,000 </li>
+            </ul><br>
+            <p>Neighborhoods were then classified into three accessibility levels:
+            </p>
+            <ul>
+                <li> Adequate Access: >= 1 library per 10,000 residents </li>
+                <li> Inadequate Access: < 1 library per 10,000 residents </li>
+                <li> No Access: 0 libraries </li>
+            </ul><br>
+            <p>The findings indicate that there is a substantial lack of adequate library access amongst neighborhoods in LA County.
+            </p>
+            <ul>
+                <li> 14 (5%) have adequate library access </li>
+                <li> 149 (58%) have inadequate library access </li>
+                <li> 93 (36%) have no library access </li>
+            </ul><br>
+            <p>This means that 95% of neighborhoods in LA County aren’t considered to have adequate library accessibility, suggesting that there is a larger systemic issue to library placement.
+            </p><br>
+            <div class="image">
+                <img src="../static/access_pie_chart.png" height="auto">
+            </div><br>
+            <p>The geospatial representation of access also shows no clear pattern, further reinforcing that there is a wider systemic problem to library placement that doesn’t seem to consider educational inequity.
+            </p><br>
+            <div class="image">
+                <img src="../static/library_accessability.png" height="auto">
+            </div><br>
+            <h3> Calculating Educational Need</h3>
+            <p>To measure the extent to which library placement aligns with educational need, I created a relative need index using three weighted indicators:
+            </p>
+            <ul>
+                <li>Educational Need = (EL% x .45) + (CE% x .1) + (HSE% x .45)</li>
+                <ul>
+                    <li>EL% = Percentage of English learners (weight: 45%)</li>
+                    <li>CE% = Percentage of college enrollment (weight: 10%)</li>
+                    <li>HSE% = Percentage without high school education (weight: 45%)</li>
+                </ul>
+            </ul><br>
+            <p>English learner and lack of high school education percentages were given the most weight, as they indicated greater educational need and would benefit greatly from library access, whereas college enrollment suggests existing educational attainment.
+            </p><br>
+            <p>Neighborhoods were divided into quartiles based on their educational need scores:
+            </p>
+            <ul>
+                <li> Low </li>
+                <li> Medium-Low </li>
+                <li> Medium-High </li>
+                <li> High </li>
+            </ul><br>
+            <div class="image">
+                <img src="../static/need-based_stats.png" height="auto">
+            </div><br>
+            <p>The geospatial representation demonstrates that most of the high-need neighborhoods are located in the central Los Angeles, San Fernando Valley, and Lancaster/Palmdale areas. These neighborhoods would benefit greatly from library resources, however, as demonstrated previously, most do not have adequate access.
+            </p><br>
+            <h3> Testing Equity </h3>
+            <p>To test whether there is a correlation between library accessibility and educational need, Pearson’s correlation coefficient was used between the two variables. A result was obtained of r = -0.04, indicating that there is no linear relationship, confirmed by a p-value of 0.5. This finding indicates that the placement of existing libraries did not take into consideration educational equity-planning, and was instead influenced by other factors. 
+            </p><br>
+            <h3> Quartile-Level Analysis </h3>
+            <p>To verify this correlation insignificance, the average library accessibility was calculated for each quartile. 
+            </p><br>
+            <table>
+                <tr>
+                    <th>Need Quartile</th>
+                    <th>Mean</th>
+                </tr>
+                <tr>
+                    <td>Low</td>
+                    <td>0.378</td>
+                </tr>
+                <tr>
+                    <td>Medium-Low</td>
+                    <td>0.390</td>
+                </tr>
+                <tr>
+                    <td>Medium-High</td>
+                    <td>0.192</td>
+                </tr>
+                <tr>
+                    <td>High</td>
+                    <td>0.333</td>
+                </tr>
+            </table><br>
+            <p>The results confirm that there is an absence of any intentional education-based equity planning, as medium-low need areas have the highest average access, and medium-high need areas have the lowest. If educational need were taken into consideration, high need neighborhoods would have the highest access, and low need the lowest.
+            </p><br>
+            <h3> Conclusion </h3>
+            <p>The results indicate two issues with the current LA County library infrastructure. Firstly, there is a critical gap in adequate library access across the entirety of LA County, with 95% of neighborhoods failing to reach the threshold, and 36% having no library within their boundaries at all. This affects millions of Angelenos, not just those who are located in areas of educational need. Secondly, there does not seem to be a pattern to library placement, at least not relative to education-based equity. High need neighborhoods, such as those in central Los Angeles, are not prioritized in library placement, and there is instead a random distribution that is most likely influenced by other factors. These two findings showcase the flaws with the current LA County library infrastructure, failing to serve neighborhoods with the greatest educational needs, but also offer the opportunity to transform it, ensuring that areas of high need are prioritized in future planning.
+            </p><br>
+            <h2> Policy Recommendations </h2>
+            <p>To promptly address the current inequity in library dispersal, I suggest launching mobile library vans, or “bookmobiles,” in clustered high need areas such as central Los Angeles, an area which was observed to contain the most neighborhoods with educational gaps, that can serve multiple neighborhoods at once. The LA County library system has already launched four vans in areas like Antelope Valley, meaning that the infrastructure and planning can be reused at a low cost. Because of the number of different library systems in LA County, the funding for such a project would best come from local government allocation, to ensure all high-need areas are covered. This solution would ensure that the areas with the most need are quickly addressed as more permanent solutions are developed.
+            </p><br>
+            <p>In the long-term, I suggest including educational need as a mandatory criteria for future library placements, ensuring that areas that have a high inequity are prioritized. Before any new libraries are built, residents from high need neighborhoods should be a part of the stakeholder discussions, and should be able to address concerns of inequity. This will lead to strategic planning that is driven by filling in gaps of education-based inequity, ensuring future projects are providing for the most in-need Angeleno neighborhoods.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

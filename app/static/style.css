@@ -1,0 +1,135 @@
+@font-face {
+  font-family: editorial-new; /* set name */
+  src: url(../static/fonts/PPEditorialNew-Regular-BF644b214ff145f.otf); /* url of the font */
+}
+
+@font-face {
+  font-family: google-sans-flex; /* set name */
+  src: url(../static/fonts/GoogleSansFlex-VariableFont_GRAD\,ROND\,opsz\,slnt\,wdth\,wght.ttf); /* url of the font */
+}
+
+body,html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+
+    background-color: rgb(250, 250, 248);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+iframe {
+    border: solid 1px;
+    display: block;
+
+    width: 100%;
+    height: 500px;
+
+    overflow: hidden;
+}
+
+img {
+    max-width: 500px;
+}
+
+.image {
+    text-align: center;
+    width: 100%;
+}
+
+.leaflet-heatmap-layer {
+    z-index: 300 !important;
+}
+
+.navbar {
+    background-color: rgb(10, 10, 10);
+
+    height: 50px;
+    width: 100%;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+
+    max-width: 800px;
+}
+
+.container h1 {
+    font-family: editorial-new;
+    font-size: 26px;
+    color: rgb(10, 10, 10);
+    font-weight: 600;
+
+    margin: 10px 0 10px 0;
+}
+
+.container p, li {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    color: rgb(10, 10, 10);
+    font-weight: normal;
+
+    margin: 0 0 10px 0;
+}
+
+.container h2 {
+    font-family: editorial-new;
+    font-size: 20px;
+    color: rgb(10, 10, 10);
+    font-weight: 600;
+
+    border-bottom: solid 1px;
+
+    margin: 20px 0 10px 0;
+}
+
+.container h3 {
+    font-family: editorial-new;
+    font-size: 18px;
+    color: rgb(10, 10, 10);
+    font-weight: 600;
+
+    margin: 20px 0 10px 0;
+}
+
+.container-title {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: inline-block;
+    background-color: rgb(10, 10, 10);
+    border-radius: 3px;
+
+    margin-bottom: 0px !important;
+    padding: 5px !important;
+    
+    color: rgb(250, 250, 248) !important;
+    font-weight: normal !important;
+    font-size: 12px !important;
+    font-family: 'Times New Roman', Times, serif !important;
+}
+
+.container-iframe {
+    margin: 30px 0 30px 0;
+}
+
+.container-iframe p {
+    margin-top: 10px;
+
+    font-style: italic;
+    font-size: 12px;
+}
+
+.container-section {
+    margin: 0 0 20px 0 ;
+}
+
+.container-section p {
+    margin: 0;
+}
